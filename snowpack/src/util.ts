@@ -325,3 +325,34 @@ export function cssSourceMappingURL(code: string, sourceMappingURL: string) {
 export function jsSourceMappingURL(code: string, sourceMappingURL: string) {
   return code.replace(/\n*$/, '') + `\n//# sourceMappingURL=${sourceMappingURL}\n`; // strip ending lines & append source map (with linebreaks for safety)
 }
+
+/** URL relative */
+export function relativeURL(path1: string, path2: string): string {
+  let url = path.relative(path1, path2).replace(/\\/g, '/');
+  if (!url.startsWith('.')) {
+    url = './' + url;
+  }
+  return url;
+}
+
+const CLOSING_HEAD_TAG = /<\s*\/\s*head\s*>/gi;
+
+/** Append HTML before closing </head> tag */
+export function appendHTMLToHead(doc: string, htmlToAdd: string) {
+  const closingHeadMatch = doc.match(CLOSING_HEAD_TAG);
+  if (closingHeadMatch && closingHeadMatch.length === 1) {
+    return doc.replace(new RegExp(`(${closingHeadMatch[0]})`), `${htmlToAdd}$1`);
+  }
+  return doc + htmlToAdd;
+}
+
+const CLOSING_BODY_TAG = /<\s*\/\s*body\s*>/gi;
+
+/** Append HTML before closing </body> tag */
+export function appendHTMLToBody(doc: string, htmlToAdd: string) {
+  const closingBodyMatch = doc.match(CLOSING_BODY_TAG);
+  if (closingBodyMatch && closingBodyMatch.length === 1) {
+    return doc.replace(new RegExp(`(${closingBodyMatch[0]})`), `${htmlToAdd}$1`);
+  }
+  return doc + htmlToAdd;
+}

@@ -1,9 +1,7 @@
 import type CSSModuleLoader from 'css-modules-loader-core';
 import path from 'path';
 import {SnowpackConfig} from '../types/snowpack';
-import {getExt, URL_HAS_PROTOCOL_REGEX} from '../util';
-
-const CLOSING_BODY_TAG = /<\s*\/\s*body\s*>/gi;
+import {appendHTMLToBody, getExt, URL_HAS_PROTOCOL_REGEX} from '../util';
 
 export function getMetaUrlPath(urlPath: string, isDev: boolean, config: SnowpackConfig): string {
   let {baseUrl, metaDir} = config.buildOptions || {};
@@ -72,15 +70,7 @@ export function wrapHtmlResponse({
       isDev,
       config,
     )}"></script>`;
-
-    const closingBodyMatch = code.match(CLOSING_BODY_TAG);
-    if (closingBodyMatch && closingBodyMatch.length === 1) {
-      // if </body> tag (and there’s only one), append before that ends
-      code = code.replace(new RegExp(`(${closingBodyMatch[0]})`), `${hmrScript}$1`);
-    } else {
-      // if no </body> tag (technically not required), or there’s something weird going on (multiple </body> tags), append to end of code
-      code += hmrScript;
-    }
+    code = appendHTMLToBody(code, hmrScript);
   }
   return code;
 }
