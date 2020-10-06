@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "array-flatten": "^3.0.0",
-    "vue": "^2.0.0"
+    "vue": "^3.0.0"
   },
   "devDependencies": {
     "snowpack": "^2.7.0"
