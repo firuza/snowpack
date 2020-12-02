@@ -15,7 +15,7 @@
     "@emotion/is-prop-valid": "^0.8.5",
     "array-flatten": "^3.0.0",
     "http-vue-loader": "^1.4.1",
-    "vue": "^2.0.0",
+    "vue": "^3.0.4",
     "vue-router": "^3.0.0"
   },
   "devDependencies": {

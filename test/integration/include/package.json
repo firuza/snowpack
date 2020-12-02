@@ -18,7 +18,7 @@
     "package-01": "file:./packages/package-01",
     "package-02": "file:./packages/package-02",
     "svelte": "^3.21.0",
-    "vue": "^2.0.0",
+    "vue": "^3.0.4",
     "vue-router": "^3.0.0"
   },
   "devDependencies": {
