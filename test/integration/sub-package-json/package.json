@@ -14,7 +14,7 @@
     }
   },
   "dependencies": {
-    "solid-js": "^0.16.7"
+    "solid-js": "^0.26.0"
   },
   "devDependencies": {
     "snowpack": "^2.7.0"
